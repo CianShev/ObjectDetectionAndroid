@@ -32,7 +32,7 @@ Check the version of TensorFlow with the below command. This tutorial was achiev
 
 ```
 (tensorflow1) C:\> pip show tensorflow
-(tensorflow1) C:\> pip show tensorflow
+
 Name: tensorflow
 Version: 1.14.0
 Summary: TensorFlow is an open source machine learning framework for everyone.
@@ -56,9 +56,35 @@ Then, install the following packages. Some are used for running your model on a 
 (tensorflow1) C:\> pip install pandas
 (tensorflow1) C:\> pip install opencv-python
 ```
-Next, we need to clone the official TF repo. This can be done from https://github.com/tensorflow/models or with the following command: 
+Next, create a folder directly in the C drive named "tensorflow1". We need to clone the official TF repo into this folder. This can be done from https://github.com/tensorflow/models or with the following command: 
 ```
 (tensorflow1) C:\> git clone https://github.com/tensorflow/models
 ```
-Extract the files if compressed and rename "models-master" to "models" if it has not changed already. 
+Extract the files if compressed and rename "models-master" to "models" if it has not changed already and place these files into your tensorflow1 folder on the C drive. Then, clone or download the repo [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10) and unzip or move the contents of this folder directly to the C:\tensorflow1\models\research\object_detection folder. You can overwrite any files that are conflicting.  
+Your \object_detection\ folder should now look like this:
 
+<p align="center">
+  <img src="Pictures/folderScreenshot.jpg">
+</p>
+
+
+Since we are training and deploying our own model, we need to delete the contents of several folders (but **not** the folders themselves):
+
+- All files in \object_detection\images\train and \object_detection\images\test
+- The “test_labels.csv” and “train_labels.csv” files in \object_detection\images
+- All files in \object_detection\training
+- All files in \object_detection\inference_graph
+
+Then we need to set our PYTHONPATH variable with the below command from any directory: 
+(Everytime your virtual environment is exited and restarted, you will need to re-run this command as it is not persistent) 
+
+```
+(tensorflow1) C:\> set PYTHONPATH=C:\tensorflow1\models;C:\tensorflow1\models\research;C:\tensorflow1\models\research\slim
+```
+Next, we compile the protobuffs with the following command from the \tensorflow1\models\research\ direcory:
+
+```
+(tensorflow1) C:\tensorflow1\models\research> protoc --python_out=. .\object_detection\protos\anchor_generator.proto .\object_detection\protos\argmax_matcher.proto .\object_detection\protos\bipartite_matcher.proto .\object_detection\protos\box_coder.proto .\object_detection\protos\box_predictor.proto .\object_detection\protos\eval.proto .\object_detection\protos\faster_rcnn.proto .\object_detection\protos\faster_rcnn_box_coder.proto .\object_detection\protos\grid_anchor_generator.proto .\object_detection\protos\hyperparams.proto .\object_detection\protos\image_resizer.proto .\object_detection\protos\input_reader.proto .\object_detection\protos\losses.proto .\object_detection\protos\matcher.proto .\object_detection\protos\mean_stddev_box_coder.proto .\object_detection\protos\model.proto .\object_detection\protos\optimizer.proto .\object_detection\protos\pipeline.proto .\object_detection\protos\post_processing.proto .\object_detection\protos\preprocessor.proto .\object_detection\protos\region_similarity_calculator.proto .\object_detection\protos\square_box_coder.proto .\object_detection\protos\ssd.proto .\object_detection\protos\ssd_anchor_generator.proto .\object_detection\protos\string_int_label_map.proto .\object_detection\protos\train.proto .\object_detection\protos\keypoint_box_coder.proto .\object_detection\protos\multiscale_anchor_generator.proto .\object_detection\protos\graph_rewriter.proto .\object_detection\protos\calibration.proto .\object_detection\protos\flexible_grid_anchor_generator.proto
+
+
+```
