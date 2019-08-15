@@ -64,7 +64,7 @@ Extract the files if compressed and rename "models-master" to "models" if it has
 Your \object_detection\ folder should now look like this:
 
 <p align="center">
-  <img src="https://github.com/CianShev/ObjectDetectionAndroid/blob/master/folderSnip.JPG.jpg">
+  <img src="folderSnip.JPG">
 </p>
 
 
