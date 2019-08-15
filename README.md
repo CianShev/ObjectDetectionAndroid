@@ -1,41 +1,45 @@
-# TensorFlow Lite Object Detection Android Demo
+# TensorFlow Lite Object Detection for Android on Windows 10
 ### Overview
-This is a camera app that continuously detects the objects (bounding boxes and classes) in the frames seen by your device's back camera, using a quantized [MobileNet SSD](https://github.com/tensorflow/models/tree/master/research/object_detection) model trained on the [COCO dataset](http://cocodataset.org/). These instructions walk you through building and running the demo on an Android device.
+The purpose of this document is to detail the pipeline for configuring and local training a machine learning model for object detection on Windows 10 and deploying this model to an Android mobile device.
+This document and repo has been created as a modified and updated version of the official TF repo in conjuction with a 3rd party repo [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10)
 
-The model files are downloaded via Gradle scripts when you build and run. You don't need to do any steps to download TFLite models into the project explicitly.
+## Getting Started
+Firstly, download Anaconda virtual environment. There are several version conflict issues (notably with Pip, Python and TensorFlow itself) that will prevent initialisation or training of the model, so utilising a virtual environment is neccessary.  
 
-Application can run either on device or emulator.
+Navigate to [the Anaconda downloads page](https://www.anaconda.com/distribution/) and select version 3.x.x (currently 3.7), the version suitable for Python 3.x. After installation, run the Anaconda prompt with administrator privileges and enter the following commands to create our new virtual environment named tensorflow1: 
 
-<!-- TODO(b/124116863): Add app screenshot. -->
+```
+(base) C:\Windows\system32> cd /
+(base) C:\Windows\system32> conda create -n tensorflow1 pip python=3.5
+```
 
-## Build the demo using Android Studio
+Once installed, activate the virtual environment and run some updates with the below commands:
+```
+(base) C:\> conda activate tensorflow1
+(tensorflow1) C:\> python -m pip install --upgrade pip
+```
 
-### Prerequisites
+Then, we can install TensorFlow using pip
 
-* If you don't have already, install **[Android Studio](https://developer.android.com/studio/index.html)**, following the instructions on the website.
+```
+(tensorflow1) C:\> pip install --ignore-installed --upgrade tensorflow
+```
+Check the version of TensorFlow with the below command. This tutorial was achieved using 1.14 but future versions should work fine. If you are running into errors that are not addressed in this document, rolling back to 1.14 may fix some issues
 
-* You need an Android device and Android development environment with minimum API 21.
-* Android Studio 3.2 or later.
-
-### Building
-* Open Android Studio, and from the Welcome screen, select Open an existing Android Studio project.
-
-* From the Open File or Project window that appears, navigate to and select the tensorflow-lite/examples/object_detection/android directory from wherever you cloned the TensorFlow Lite sample GitHub repo. Click OK.
-
-* If it asks you to do a Gradle Sync, click OK.
-
-* You may also need to install various platforms and tools, if you get errors like "Failed to find target with hash string 'android-21'" and similar.
-Click the Run button (the green arrow) or select Run > Run 'android' from the top menu. You may need to rebuild the project using Build > Rebuild Project.
-
-* If it asks you to use Instant Run, click Proceed Without Instant Run.
-
-* Also, you need to have an Android device plugged in with developer options enabled at this point. See **[here](https://developer.android.com/studio/run/device)** for more details on setting up developer devices.
+```
+(tensorflow1) C:\> pip show tensorflow
+(tensorflow1) C:\> pip show tensorflow
+Name: tensorflow
+Version: 1.14.0
+Summary: TensorFlow is an open source machine learning framework for everyone.
+Home-page: https://www.tensorflow.org/
+Author: Google Inc.
+Author-email: packages@tensorflow.org
+License: Apache 2.0
+Location: c:\programdata\anaconda3\envs\tensorflow69\lib\site-packages
+Requires: grpcio, keras-preprocessing, protobuf, termcolor, gast, wheel, astor, google-pasta, keras-applications, wrapt, absl-py, tensorflow-estimator, numpy, six, tensorboard
+``` 
 
 
-### Model used
-Downloading, extraction and placing it in assets folder has been managed automatically by download.gradle.
 
-If you explicitly want to download the model, you can download from **[here](http://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)**. Extract the zip to get the .tflite and label file.
 
-### Additional Note
-_Please do not delete the assets folder content_. If you explicitly deleted the files, then please choose *Build*->*Rebuild* from menu to re-download the deleted model files into assets folder.
