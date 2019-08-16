@@ -5,7 +5,7 @@ This document and repo has been created as a modified and updated version of the
 
 ## Potential Issues
 There are several potential pitfalls to encounter when using TensorFlow and especially when attempting to deploy the model to mobile. Common issues are addressed at the end of this README. 
-Note: At the time of writing, TF2.0 currently *does not* support Object Detection as noted in the official GitHub release notes [here] (https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0-alpha0), [here](https://github.com/tensorflow/models/issues/7036) and [here](https://github.com/tensorflow/models/issues/6423)
+Note: At the time of writing, TF2.0 currently *does not* support Object Detection as noted in the official GitHub release notes [here(https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0-alpha0), [here](https://github.com/tensorflow/models/issues/7036) and [here](https://github.com/tensorflow/models/issues/6423)
 
 ## Configuration process and pipeline
 We will start by setting up our virtual environment, configuring TensorFlow, gathering and labelling data (in this case, pulling images from the web that are 300x300 and of type .jpeg and using LabelImg), converting the data for use by TensorFlow, examining the data with Netron, converting our transfer learned model to .tflite and finally deploying this object detection model to Android. 
