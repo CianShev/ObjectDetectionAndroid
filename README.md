@@ -5,7 +5,10 @@ This document and repo has been created as a modified and updated version of the
 
 ## Potential Issues
 There are several potential pitfalls to encounter when using TensorFlow and especially when attempting to deploy the model to mobile. Common issues are addressed at the end of this README. 
-Note: At the time of writing, TF2.0 currently *does not* support Object Detection as noted in the official GitHub release notes [here (esp. "Breaking Changes"](https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0-alpha0), [here](https://github.com/tensorflow/models/issues/7036) and [here](https://github.com/tensorflow/models/issues/6423)
+Note: At the time of writing, TF2.0 currently *does not* support Object Detection as noted in the official GitHub release notes [here] (https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0-alpha0), [here](https://github.com/tensorflow/models/issues/7036) and [here](https://github.com/tensorflow/models/issues/6423)
+
+## Configuration process and pipeline
+We will start by setting up our virtual environment, configuring TensorFlow, gathering and labelling data (in this case, pulling images from the web that are 300x300 and of type .jpeg and using LabelImg), converting the data for use by TensorFlow, examining the data with Netron, converting our transfer learned model to .tflite and finally deploying this object detection model to Android. 
 
 ## Getting Started
 Firstly, download Anaconda virtual environment. There are several version conflict issues (notably with Pip, Python and TensorFlow itself) that will prevent initialisation or training of the model, so utilising a virtual environment is neccessary.  
@@ -86,5 +89,10 @@ Next, we compile the protobuffs with the following command from the \tensorflow1
 ```
 (tensorflow1) C:\tensorflow1\models\research> protoc --python_out=. .\object_detection\protos\anchor_generator.proto .\object_detection\protos\argmax_matcher.proto .\object_detection\protos\bipartite_matcher.proto .\object_detection\protos\box_coder.proto .\object_detection\protos\box_predictor.proto .\object_detection\protos\eval.proto .\object_detection\protos\faster_rcnn.proto .\object_detection\protos\faster_rcnn_box_coder.proto .\object_detection\protos\grid_anchor_generator.proto .\object_detection\protos\hyperparams.proto .\object_detection\protos\image_resizer.proto .\object_detection\protos\input_reader.proto .\object_detection\protos\losses.proto .\object_detection\protos\matcher.proto .\object_detection\protos\mean_stddev_box_coder.proto .\object_detection\protos\model.proto .\object_detection\protos\optimizer.proto .\object_detection\protos\pipeline.proto .\object_detection\protos\post_processing.proto .\object_detection\protos\preprocessor.proto .\object_detection\protos\region_similarity_calculator.proto .\object_detection\protos\square_box_coder.proto .\object_detection\protos\ssd.proto .\object_detection\protos\ssd_anchor_generator.proto .\object_detection\protos\string_int_label_map.proto .\object_detection\protos\train.proto .\object_detection\protos\keypoint_box_coder.proto .\object_detection\protos\multiscale_anchor_generator.proto .\object_detection\protos\graph_rewriter.proto .\object_detection\protos\calibration.proto .\object_detection\protos\flexible_grid_anchor_generator.proto
 ```
-
-
+From the same directory, run the following commands: 
+```
+(tensorflow1) C:\tensorflow1\models\research> python setup.py build
+(tensorflow1) C:\tensorflow1\models\research> python setup.py install
+```
+If all this is succesful, we can proceed to our image gathering and labeling. There are several tools available to help make this process faster such as the batch image downloader [here](https://chrome.google.com/webstore/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj) but for our training and testing all images were selected and downloaded by hand. A good starting point for a dataset would be 10,000 images, however our model was training and tested with only 1,000 with adequate results. 
+We will use the program [LabelImg](https://github.com/tzutalin/labelImg)
