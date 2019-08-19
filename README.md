@@ -1,7 +1,8 @@
+##*This repo is currently under development*
 # TensorFlow Lite Object Detection for Android on Windows 10
 ### Overview
 The purpose of this document is to detail the pipeline for configuring and local training a machine learning model for object detection on Windows 10 and deploying this model to an Android mobile device.
-This document and repo has been created as a modified and updated version of the official TF repo in conjuction with a 3rd party repo [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10)
+This document and repo has been created as a modified and updated version of the official TF repo and would not have been possible without the guide [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10)
 
 ## Potential Issues
 There are several potential pitfalls to encounter when using TensorFlow and especially when attempting to deploy the model to mobile. Common issues are addressed at the end of this README. 
@@ -13,7 +14,7 @@ We will start by setting up our virtual environment, configuring TensorFlow, gat
 ## Getting Started
 Firstly, download Anaconda virtual environment. There are several version conflict issues (notably with Pip, Python and TensorFlow itself) that will prevent initialisation or training of the model, so utilising a virtual environment is neccessary.  
 
-Navigate to [the Anaconda downloads page](https://www.anaconda.com/distribution/) and select version 3.x.x (currently 3.7), the version suitable for Python 3.x. Install Anaconda After installation, run the Anaconda prompt with administrator privileges and enter the following commands to create our new virtual environment named tensorflow1: 
+Navigate to [the Anaconda downloads page](https://www.anaconda.com/distribution/) and select version 3.x.x (currently 3.7) for Windows, the version suitable for Python 3.x. Don't tick the box to add PATH on installation. After installation, run the Anaconda prompt with administrator privileges and enter the following commands to create our new virtual environment named tensorflow1: 
 
 ```
 (base) C:\Windows\system32> cd /
@@ -22,7 +23,7 @@ Navigate to [the Anaconda downloads page](https://www.anaconda.com/distribution/
 
 Once installed, activate the virtual environment and run some updates with the below commands:
 ```
-(base) C:\> conda activate tensorflow1
+(base) C:\> activate tensorflow1
 (tensorflow1) C:\> python -m pip install --upgrade pip
 ```
 Failing to update pip or duplicate installs in the virtual environment will break the process. 
@@ -59,17 +60,21 @@ Then, install the following packages. Some are used for running your model on a 
 (tensorflow1) C:\> pip install pandas
 (tensorflow1) C:\> pip install opencv-python
 ```
-Next, create a folder directly in the C drive named "tensorflow1". We need to clone the official TF repo into this folder. This can be done from https://github.com/tensorflow/models or with the following command: 
+Next, create a folder directly in the C drive named "tensorflow1". We need to clone the official TF repo into this folder. This can be done from https://github.com/tensorflow/models or with the following command if you have Git installed (you will need to close and restart the Anaconda prompt and run "activate tensorflow1" again if you install Git after running the above steps: 
 ```
-(tensorflow1) C:\> git clone https://github.com/tensorflow/models
+(tensorflow1) C:\> cd /
+(tensorflow1) C:\> mkdir tensorflow1
+(tensorflow1) C:\> cd tensorflow1
+(tensorflow1) C:\tensorflow1> git clone https://github.com/tensorflow/models
 ```
-Extract the files if compressed and rename "models-master" to "models" if it has not changed already and place these files into your tensorflow1 folder on the C drive. Then, clone or download the repo [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10) and unzip or move the contents of this folder directly to the C:\tensorflow1\models\research\object_detection folder. You can overwrite any files that are conflicting.  
+Extract the files if compressed and rename "models-master" to "models" if it has not changed already and place these files into your tensorflow1 folder on the C drive. Then, download the repo [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10) as a zip file and unzip the contents of this folder directly to the C:\tensorflow1\models\research\object_detection folder.
 Your \object_detection\ folder should now look like this:
 
 <p align="center">
   <img src="folderSnip.JPG">
 </p>
 
+If the \object_detection\ folder contains a folder called "TensorFlow-Object-Detection..." then you have moved the entire folder to \object_detection\ and this will not work, you need to move the *contents* of "TensorFlow-Object-Detection..." directly to the \object_detection\ directory. If all else fails, extract the contents of the folder and copy all files to \object_detection\. 
 
 Since we are training and deploying our own model, we need to delete the contents of several folders (but **not** the folders themselves):
 
@@ -95,4 +100,4 @@ From the same directory, run the following commands:
 (tensorflow1) C:\tensorflow1\models\research> python setup.py install
 ```
 If all this is succesful, we can proceed to our image gathering and labeling. There are several tools available to help make this process faster such as the batch image downloader [here](https://chrome.google.com/webstore/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj) but for our training and testing all images were selected and downloaded by hand. A good starting point for a dataset would be 10,000 images, however our model was training and tested with only 1,000 with adequate results. 
-We will use the program [LabelImg](https://github.com/tzutalin/labelImg)
+We will use the program [LabelImg](https://tzutalin.github.io/labelImg/). Download and unzip the latest Windows version and run the .exe file. After you have all the pictures you need, move 20% of them to the \object_detection\images\test directory, and 80% of them to the \object_detection\images\train directory. Make sure there are a variety of pictures in both the \test and \train directories. Point
