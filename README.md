@@ -1,4 +1,4 @@
-##*This repo is currently under development*
+*This repo is currently under development*
 # TensorFlow Lite Object Detection for Android on Windows 10
 ### Overview
 The purpose of this document is to detail the pipeline for configuring and local training a machine learning model for object detection on Windows 10 and deploying this model to an Android mobile device.
