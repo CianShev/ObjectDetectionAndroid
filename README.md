@@ -165,6 +165,19 @@ item {
 Save your file as labelmap.pbtxt (in notepad++ you can simply save as type all files and specify the title as labelmap.pbtxt) in the \object_detection\training directory. When you examine the \training directory, this file should appear with extension .pbtxt and if it does not you have probably saved it as a .txt file will not work.
 
 We then can finally perform the last step before training which is to select an appropriate transfer learned model checkpoint and edit the .config file for training. 
+
 **Important Note:** Currently, only mobilenet models which contain the quantized flag are suitable for deployment to Android in the .tflite format. Currently, this information is not included in any official documentation and was a major roadblock for this project. If the wrong model is selected, you will encounter one of the following two errors: 
+
  1. (at converting to .tflite stage) - Expected binary or unicode string; got None
  2. (at running of app on Android) - "cannot convert between a tensorflow lite buffer with xxxx bytes and a bytebuffer with xxxx bytes
+
+
+
+
+
+## TO-DO 
+Common errors and fixes
+Android Studio 
+Build from source 
+Netron 
+Conversion process
