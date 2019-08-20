@@ -176,8 +176,8 @@ We then can finally perform the last step before training which is to select an 
 
 
 ## TO-DO 
-Common errors and fixes
-Android Studio 
-Build from source 
-Netron 
-Conversion process
+- Common errors and fixes
+- Android Studio 
+- Build from source 
+- Netron 
+- Conversion process
