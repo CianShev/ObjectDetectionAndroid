@@ -2,7 +2,7 @@
 # TensorFlow Lite Object Detection for Android on Windows 10
 ### Overview
 The purpose of this document is to detail the pipeline for configuring and local training a machine learning model for object detection on Windows 10 and deploying this model to an Android mobile device.
-This document and repo has been created as a modified and updated version of the official TF repo and would not have been possible without the guide [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10)
+This document and repo has been created as a modified and updated version of the official TF repo and would not have been possible without the guide [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10).
 
 ## Potential Issues
 There are several potential pitfalls when using TensorFlow and especially when attempting to deploy the model to mobile. Common issues are addressed at the end of this README. 
