@@ -1,12 +1,12 @@
 *This repo is currently under development*
-# TensorFlow Lite Object Detection for Android on Windows 10
-### Overview
+# TensorFlow Lite Object Detection for Android on Windows 10 Using Local CPU Training 
+## Overview
 The purpose of this document is to detail the pipeline for configuring and local training a machine learning model for object detection on Windows 10 and deploying this model to an Android mobile device.
 This document and repo has been created as a modified and updated version of the official TF repo and would not have been possible without the guide [here](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10).
 
 ## Potential Issues
 There are several potential pitfalls when using TensorFlow and especially when attempting to deploy the model to mobile. Common issues are addressed at the end of this README. 
-Note: At the time of writing, TF2.0 currently *does not* support Object Detection as noted in the official GitHub release notes [here](https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0-alpha0), [here](https://github.com/tensorflow/models/issues/7036) and [here](https://github.com/tensorflow/models/issues/6423)
+Note: At the time of writing, TF2.0 currently *does not* support Object Detection as noted in the official GitHub release notes [here](https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0-alpha0), [here](https://github.com/tensorflow/models/issues/7036) and [here](https://github.com/tensorflow/models/issues/6423).
 
 ## Configuration process and pipeline
 We will start by setting up our virtual environment, configuring TensorFlow, gathering and labelling data (in this case, pulling images from the web that are 300x300 and of type .jpeg and using LabelImg), converting the data for use by TensorFlow, examining the data with Netron, converting our transfer learned model to .tflite and finally deploying this object detection model to Android. 
@@ -166,7 +166,7 @@ Save your file as labelmap.pbtxt (in notepad++ you can simply save as type all f
 
 We then can finally perform the last step before training which is to select an appropriate transfer learned model checkpoint and edit the .config file for training. 
 
-**Important Note:** Currently, only mobilenet models which contain the quantized flag are suitable for deployment to Android in the .tflite format. Currently, this information is not included in any official documentation and was a major roadblock for this project. If the wrong model is selected, you will encounter one of the following two errors: 
+**Important Note:** Currently, only MobileNet models which contain the quantized flag are suitable for deployment to Android in the .tflite format. Currently, this information is not included in any official documentation and was a major roadblock for this project. If the wrong model is selected, you will encounter one of the following two errors: 
 
  1. (at converting to .tflite stage) - Expected binary or unicode string; got None
  2. (at running of app on Android) - "cannot convert between a tensorflow lite buffer with xxxx bytes and a bytebuffer with xxxx bytes
