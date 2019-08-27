@@ -166,7 +166,7 @@ Save your file as labelmap.pbtxt (in notepad++ you can simply save as type all f
 
 We then can finally perform the last step before training which is to select an appropriate transfer learned model checkpoint and edit the .config file for training. 
 
-**Important Note:** Currently, only MobileNet models which contain the quantized flag are suitable for deployment to Android in the .tflite format. Currently, this information is not included in any official documentation and was a major roadblock for this project. If the wrong model is selected, you will encounter one of the following two errors: 
+**Important Note:** Currently, only SSD models (preferably SSD_MobileNet if possible) which contain the quantized flag are suitable for deployment to Android in the .tflite format. Currently, this information is not included in any official documentation and was a major roadblock for this project. If the wrong model is selected, you will encounter one of the following two errors: 
 
  1. (at converting to .tflite stage) - Expected binary or unicode string; got None
  2. (at running of app on Android) - "cannot convert between a tensorflow lite buffer with xxxx bytes and a bytebuffer with xxxx bytes
